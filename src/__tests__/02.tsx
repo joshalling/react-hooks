@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import App from '../final/02'
-// import App from '../exercise/02'
+// import App from '../final/02'
+import App from '../exercise/02'
 
 afterEach(() => {
   window.localStorage.removeItem('name')
@@ -30,12 +30,12 @@ test('App works', () => {
   window.localStorage.setItem('name', isSerialized ? '"jill"' : 'jill')
   rerender(<App key="new" />)
   const greetingText = screen.getByText(/hello/i).textContent
-  if (!greetingText.includes('jill')) {
+  if (!greetingText?.includes('jill')) {
     throw new Error(
       `🚨 the app is not initialized with the name that's in localStorage. Make sure useState is called with the value in localStorage.`,
     )
   }
-  if (greetingText.includes('"')) {
+  if (greetingText?.includes('"')) {
     throw new Error(
       `🚨 the value in localStorage is not getting deserialized properly. Make sure the value is deserialized when read from localStorage.`,
     )
